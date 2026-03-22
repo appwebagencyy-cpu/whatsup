@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>App Mockup</title>
+<style>
+  :root{--bg:#f4f6f9;--card:#fff;--accent:#2563eb;--muted:#6b7280}
+  *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:#111}
+  .app{max-width:420px;margin:20px auto;border-radius:12px;overflow:hidden;box-shadow:0 8px 30px rgba(2,6,23,.08)}
+  header{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(90deg,#fff 0,#f8fafc 100%)}
+  .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+  .title{font-size:16px;font-weight:600}
+  .subtitle{font-size:12px;color:var(--muted)}
+  .search{margin:12px 16px;display:flex}
+  .search input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid #e6edf3;background:#fff}
+  main{padding:12px 16px;background:var(--bg)}
+  .card{background:var(--card);padding:12px;border-radius:10px;margin-bottom:12px;box-shadow:0 2px 6px rgba(2,6,23,.04)}
+  .card h3{margin:0 0 6px;font-size:15px}
+  .card p{margin:0;color:var(--muted);font-size:13px}
+  .placeholder{height:220px;border-radius:8px;background:linear-gradient(180deg,#eef2ff,#ffffff);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;border:1px dashed #e0e7ff}
+  .row{display:flex;gap:10px}
+  .small{flex:1;padding:10px;background:linear-gradient(180deg,#fff,#f9fafb);border-radius:8px;text-align:center;font-weight:600;color:var(--muted);border:1px solid #eef2ff}
+  nav{display:flex;justify-content:space-around;padding:10px 12px;background:#fff;border-top:1px solid #eef2ff}
+  nav button{background:none;border:none;padding:8px 10px;border-radius:8px;color:var(--muted);font-weight:600}
+  nav button.active{color:var(--accent)}
+  @media (max-width:460px){.app{margin:10px}}
+</style>
+</head>
+<body>
+<div class="app" role="application" aria-label="App mockup">
+  <header>
+    <div class="logo">A</div>
+    <div>
+      <div class="title">App Name</div>
+      <div class="subtitle">Brief app tagline</div>
+    </div>
+  </header>
+
+  <div class="search">
+    <input type="search" placeholder="Search..." aria-label="Search" />
+  </div>
+
+  <main>
+    <div class="card">
+      <h3>Welcome</h3>
+      <p>Replace the placeholder below with your app screenshot or image.</p>
+    </div>
+
+    <div class="card placeholder" id="imagePlaceholder">
+      Click to replace image
+    </div>
+
+    <div class="row">
+      <div class="small">Action 1</div>
+      <div class="small">Action 2</div>
+    </div>
+
+    <div style="height:10px"></div>
+
+    <div class="card">
+      <h3>Recent</h3>
+      <p>No items yet — this is sample content to illustrate layout.</p>
+    </div>
+  </main>
+
+  <nav>
+    <button class="active">Home</button>
+    <button>Search</button>
+    <button>Profile</button>
+  </nav>
+</div>
+
+<script>
+  // simple image replace: click placeholder to pick an image
+  const ph = document.getElementById('imagePlaceholder');
+  ph.addEventListener('click', async ()=>{
+    const input = document.createElement('input');
+    input.type='file'; input.accept='image/*';
+    input.onchange = ()=> {
+      const f = input.files[0];
+      if(!f) return;
+      const url = URL.createObjectURL(f);
+      ph.style.backgroundImage = `url(${url})`;
+      ph.style.backgroundSize = 'cover';
+      ph.style.backgroundPosition = 'center';
+      ph.textContent = '';
+    };
+    input.click();
+  });
+</script>
+</body>
+</html>
