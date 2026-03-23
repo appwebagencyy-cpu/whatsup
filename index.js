@@ -1223,6 +1223,11 @@ app.post('/api/groups', async (req, res) => {
     }
 });
 
+// 🌐 SPA CATCH-ALL: Serve index.html for any unknown routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // --- CALL CLEANUP: Mark stale 'ringing' calls as 'missed' ---
 const cleanupStaleCalls = async () => {
     if (!db) return;
